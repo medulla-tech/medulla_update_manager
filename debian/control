@@ -1,8 +1,8 @@
 Source: pulse-update-manager
 Section: misc
 Priority: extra
-Maintainer: Adam Cécile <acecile@mandriva.com>
-Build-Depends: debhelper (>= 5), python-support
+Maintainer: Nicolas Lécureuil <nicolas.lecureuil@siveo.net>
+Build-Depends: debhelper (>= 5)
 Standards-Version: 3.9.5
 
 Package: pulse-update-manager
