@@ -87,7 +87,7 @@ if __name__ == '__main__':
         #
         online = not ('--offline' in args)
     
-        (result, result_verbose) = updateHandler.getAvaiableUpdates(online)
+        (result, result_verbose) = updateHandler.getAvailableUpdates(online)
     
         if '--json' in args:
             # Printing JSON

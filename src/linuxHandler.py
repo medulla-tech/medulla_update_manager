@@ -56,7 +56,7 @@ class linuxUpdateHandler(object):
         pass
     
     @abstractmethod
-    def getAvaiableUpdates(self, online=True, returnResultList=False):
+    def getAvailableUpdates(self, online=True, returnResultList=False):
         pass
     
     @abstractmethod

@@ -91,7 +91,7 @@ class windowsUpdateHandler(object):
         print "Is installed \t\t: %s" % update.IsInstalled
 
 
-    def getAvaiableUpdates(self, online=True, returnResultList=False):
+    def getAvailableUpdates(self, online=True, returnResultList=False):
         # Create an Update Searcher instance
         searcher = self.session.CreateupdateSearcher()
         searcher.Online = online
@@ -178,7 +178,7 @@ class windowsUpdateHandler(object):
 
     def installUpdates(self, uuid_list):
         # Searching cached updates
-        cachedUpdates = self.getAvaiableUpdates(online=False, returnResultList=True)
+        cachedUpdates = self.getAvailableUpdates(online=False, returnResultList=True)
     
         # Creating update installer object
         updatesToDownload = w32comCl.Dispatch("Microsoft.Update.UpdateColl")

@@ -37,8 +37,8 @@ class debianUpdateHandler(linuxUpdateHandler):
         version, err, ec = self.runinshell(cmd)
         return version
         
-    def getAvaiableUpdates(self, online=True, returnResultList=False):
-    
+    def getAvailableUpdates(self, online=True, returnResultList=False):
+
         # Init updates dict
         header = 'uuid,KB_Number,type,is_installed'.split(',')
         header_verbose = 'uuid,title,KB_Number,type,need_reboot,request_user_input,info_url,is_installed'.split(',')
