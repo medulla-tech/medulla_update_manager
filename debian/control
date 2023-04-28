@@ -1,4 +1,4 @@
-Source: pulse-update-manager
+Source: medulla-update-manager
 Section: misc
 Priority: extra
 Maintainer: Nicolas Lécureuil <nicolas.lecureuil@siveo.net>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 5), python-all (>= 2.6), python-all-dev (>= 2.6.6-3
 Standards-Version: 3.9.5
 X-Python-Version: >= 2.6
 
-Package: pulse-update-manager
+Package: medulla-update-manager
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends}
 Description: Pulse2 updates helper
