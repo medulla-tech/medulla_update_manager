@@ -27,10 +27,7 @@ class windowsUpdateHandler(object):
         @return: converted list
         @rtype: list
         """
-        result = []
-        for i in xrange(arr.Count):
-            result.append(arr.Item(i))
-        return result
+        return [arr.Item(i) for i in xrange(arr.Count)]
 
 
     def disableNativeUpdates(self):
@@ -95,7 +92,7 @@ class windowsUpdateHandler(object):
         # Create an Update Searcher instance
         searcher = self.session.CreateupdateSearcher()
         searcher.Online = online
-    
+
         # Init updates dict
         header = 'uuid,KB_Number,type,is_installed'.split(',')
         header_verbose = 'uuid,title,KB_Number,type,need_reboot,request_user_input,info_url,is_installed'.split(',')
@@ -103,7 +100,7 @@ class windowsUpdateHandler(object):
         content_verbose = []
         result = {'header' : header, 'content' : content}
         result_verbose = {'header' : header_verbose, 'content' : content_verbose}
-    
+
         # Return OS version
         if 'windows-xp' in self.platform:
             result_verbose['os_class'] = 1
@@ -116,63 +113,47 @@ class windowsUpdateHandler(object):
         elif 'windows-10' in self.platform:
             result_verbose['os_class'] = 5
 
-    
+
         # Searching not available and not installed updates
         # Search criterions : http://msdn.microsoft.com/en-us/library/windows/desktop/aa386526(v=vs.85).aspx
         # search by UpdateID
         searchResult = searcher.Search("IsInstalled=0 or IsInstalled=1")
-    
+
         if returnResultList:
             return self.fetchW32ComArray(searchResult.Updates)
-    
+
         for i in xrange(searchResult.Updates.Count):
             update = searchResult.Updates.Item(i)
-            # See Iupdate class: http://msdn.microsoft.com/en-us/library/windows/desktop/aa386099(v=vs.85).aspx
-            _item = []
-            _item_verbose = []
-            #update.InstallationBehavior.RebootBehavior > 0
-            #update.InstallationBehavior.CanRequestUserInput
-    
-            # UUID
-            _item.append(update.Identity.UpdateID)
-            _item_verbose.append(update.Identity.UpdateID)
-    
-            # Title
-            #_item.append(update.Title) #.encode('utf-8').decode('ascii', 'ignore')
-            _item_verbose.append(update.Title) #.encode('utf-8').decode('ascii', 'ignore')
-    
+            _item = [update.Identity.UpdateID]
+            _item_verbose = [update.Identity.UpdateID, update.Title]
             # Description
             #_item.append(update.Description) #.encode('utf-8').decode('ascii', 'ignore')
             #_item_verbose.append(update.Description) #.encode('utf-8').decode('ascii', 'ignore')
-    
+
             #_item.append(update.EulaText)
             #_item_verbose.append(update.EulaText)
-    
+
             # Kb_number
             _item.append(' '.join(self.fetchW32ComArray(update.KBArticleIDs)))
             _item_verbose.append(' '.join(self.fetchW32ComArray(update.KBArticleIDs)))
-    
+
             # Type
             _item.append(update.Type)
-            _item_verbose.append(update.Type)
-    
-            # Need reboot
-            _item_verbose.append(update.InstallationBehavior.RebootBehavior > 0)
-    
-            # Request user input
-            _item_verbose.append(update.InstallationBehavior.CanRequestUserInput)
-    
-            # Info URL
-            #_item.append(self.fetchW32ComArray(update.MoreInfoUrls)[0])
-            _item_verbose.append(self.fetchW32ComArray(update.MoreInfoUrls)[0])
-    
+            _item_verbose.extend(
+                (
+                    update.Type,
+                    update.InstallationBehavior.RebootBehavior > 0,
+                    update.InstallationBehavior.CanRequestUserInput,
+                    self.fetchW32ComArray(update.MoreInfoUrls)[0],
+                )
+            )
             # Is_installed
             _item.append(update.IsInstalled)
             _item_verbose.append(update.IsInstalled)
-    
+
             content.append(_item)
             content_verbose.append(_item_verbose)
-    
+
         return (result, result_verbose)
 
 

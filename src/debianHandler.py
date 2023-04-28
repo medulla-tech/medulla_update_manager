@@ -46,7 +46,7 @@ class debianUpdateHandler(linuxUpdateHandler):
         content_verbose = []
         result = {'header' : header, 'content' : content}
         result_verbose = {'header' : header_verbose, 'content' : content_verbose}
-    
+
         # Return OS class (debian based)
         # cat /etc/*-release|grep 'Debian\|debian' to check
         if 'debian' in self.platform:
@@ -54,83 +54,67 @@ class debianUpdateHandler(linuxUpdateHandler):
         elif 'ubuntu' in self.platform:
             result_verbose['os_class'] = 5 # 4 = DEBIAN, 5 = UBUNTU ...
         # TODO: Implement all debian derivatives
-    
+
         # ===============================================================================
         # Running apt-get update
         self.runinshell("apt-get update")
         # ===============================================================================
-        
+
         # Running Update searching command
         cmd = "LANG=C apt-get -s dist-upgrade | awk '/^Inst/ { print $2 }'"
         out, err, ec = self.runinshell(cmd)
-        
-        if out:
-            new_packages = out.strip().split('\n')
-        else:
-            new_packages = []
-        
+
+        new_packages = out.strip().split('\n') if out else []
         if returnResultList:
             return new_packages
-    
+
         # Formatting output dict
         for pkg in new_packages:
             
             # Get repository package version
             version = self.getCandidateVersion(pkg)
-                
+
             # If no version got, skipping
             if not version:
                 continue
-    
+
             # Setting package infos
-            update_uuid = pkg + "/" + version
-            
-            _item = []
-            _item_verbose = []
-    
-            # UUID (for debian based distros it is pkg_name/version)
-            _item.append(update_uuid)
-            _item_verbose.append(update_uuid)
-    
+            update_uuid = f"{pkg}/{version}"
+
+            _item = [update_uuid]
+            _item_verbose = [update_uuid]
             # Title
             cmd = "apt-cache show %s|awk '/^Description/ {first = $1; $1 = \"\"; print $0;}' | sed 's/^[[:space:]]*//'" % pkg
             title, err, ec = self.runinshell(cmd, False, pkg)
             _item_verbose.append('%s (update %s)' % (title.split('\n')[0], version)) #.encode('utf-8').decode('ascii', 'ignore')
-    
+
             # Description
             #_item.append(update.Description) #.encode('utf-8').decode('ascii', 'ignore')
             #_item_verbose.append(update.Description) #.encode('utf-8').decode('ascii', 'ignore')
-    
+
             #_item.append(update.EulaText)
             #_item_verbose.append(update.EulaText)
-    
+
             # Kb_number (package name)
             _item.append(pkg)
             _item_verbose.append(pkg)
-    
+
             # Type (type = 1)
             _item.append(1)
-            _item_verbose.append(1)
-    
-            # Need reboot (doesnt need reboot)
-            _item_verbose.append(False)
-    
-            # Request user input (False)
-            _item_verbose.append(False)
-    
+            _item_verbose.extend((1, False, False))
             # Info URL
             #_item.append(fetchW32ComArray(update.MoreInfoUrls)[0])
             cmd = "apt-cache show %s|awk '/^Homepage/ {first = $1; $1 = \"\"; print $0;}' | sed 's/^[[:space:]]*//'" % pkg
             url, err, ec = self.runinshell(cmd, False, "")
             _item_verbose.append(url.split('\n')[0])
-    
+
             # Is_installed
             _item.append(False)
             _item_verbose.append(False)
-    
+
             content.append(_item)
             content_verbose.append(_item_verbose)
-    
+
         return (result, result_verbose)
     
     
