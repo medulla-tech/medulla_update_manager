@@ -1,22 +1,28 @@
-pulse-update-manager (1.4) unstable; urgency=medium
+medulla-update-manager (1.5) unstable; urgency=medium
+
+  *  Use new medulla name
+
+ -- Nicolas Lécureuil <nicolas.lecureuil@siveo.net>  Thu, 28 Sep 2023 16:24:36 +0200
+
+medulla-update-manager (1.4) unstable; urgency=medium
 
   * Rebuild for Siveo
 
  -- Nicolas Lécureuil <nicolas.lecureuil@siveo.net>  Thu, 21 Sep 2017 16:24:36 +0200
 
-pulse-update-manager (1.3) unstable; urgency=medium
+medulla-update-manager (1.3) unstable; urgency=medium
 
   * Add --force-yes.
 
  -- Adam Cécile <acecile@mandriva.com>  Mon, 05 May 2014 16:24:36 +0200
 
-pulse-update-manager (1.2) unstable; urgency=medium
+medulla-update-manager (1.2) unstable; urgency=medium
 
   * New release.
 
  -- Adam Cécile <acecile@mandriva.com>  Mon, 28 Apr 2014 14:49:58 +0200
 
-pulse-update-manager (1.1) unstable; urgency=medium
+medulla-update-manager (1.1) unstable; urgency=medium
 
   * Initial release.
 

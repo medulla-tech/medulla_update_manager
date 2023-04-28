@@ -31,8 +31,8 @@ setup(
         'Programming Language :: Python :: 2.7',
     ],
 
-    keywords='pulse update manager',
-    name='pulse_update_manager',
-    version='1.4',
+    keywords='medulla update manager',
+    name='medulla_update_manager',
+    version='1.5',
     debian_distro='stretch',
 
