@@ -3,7 +3,7 @@
 #
 # (c) 2011-2012 Mandriva, http://www.mandriva.com/
 #
-# This file is part of Pulse 2, http://pulse2.mandriva.org
+# This file is part of Pulse 2, http://medulla2.mandriva.org
 #
 # Pulse 2 is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -51,8 +51,8 @@ if __name__ == '__main__':
     args = sys.argv
     
     if len(args) < 2:
-        print("pulse-update-manager 1.0.1")
-        print("Usage : \tpulse-update-manager [options] [update_list]")
+        print("medulla-update-manager 1.0.1")
+        print("Usage : \tmedulla-update-manager [options] [update_list]")
         print("")
         print("Options:")
         print("  -l, --list : List all updates available for this machine")
@@ -62,8 +62,8 @@ if __name__ == '__main__':
         print("")
         print("")
         print("Examples:")
-        print("  pulse-update-manager -l --offline --json")
-        print("  pulse-update-manager --install 2791765 2741517")
+        print("  medulla-update-manager -l --offline --json")
+        print("  medulla-update-manager --install 2791765 2741517")
         sys.exit(0)
     
     command = args[1]

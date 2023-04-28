@@ -7,7 +7,7 @@ buildOptions = dict(packages = [], excludes = [], include_msvcr = 1)
 base = 'Console'
 
 executables = [
-    Executable('pulse-update-manager.py', base=base)
+    Executable('medulla-update-manager.py', base=base)
 ]
 
 setup(name='Pulse Update Manager',

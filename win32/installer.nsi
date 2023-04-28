@@ -53,7 +53,7 @@ Var /GLOBAL PREVIOUSVERSION
 !insertmacro MUI_LANGUAGE "English"
 
 Name "${PRODUCT_NAME} (${PRODUCT_VERSION})"
-OutFile "pulse2-secure-agent-windows-update-plugin-${PRODUCT_VERSION}.exe"
+OutFile "medulla2-secure-agent-windows-update-plugin-${PRODUCT_VERSION}.exe"
 InstallDir "$PROGRAMFILES\Mandriva\Windows-Update-Plugin"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -98,7 +98,7 @@ FunctionEnd
 Section "Core" Core
   SectionIn RO
 
-  SetOutPath "$INSTDIR\usr\share\pulse-update-manager"
+  SetOutPath "$INSTDIR\usr\share\medulla-update-manager"
   SetOverwrite on
 
   ; Files not depending on cygwin dlls
@@ -111,7 +111,7 @@ Section "Core" Core
   File bin\win32ui.pyd
   File bin\win32api.pyd
   File bin\pywintypes27.dll
-  File bin\pulse-update-manager.exe
+  File bin\medulla-update-manager.exe
   File bin\library.zip
   File bin\msvcp90.dll
   File bin\bz2.pyd

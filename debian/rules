@@ -27,8 +27,8 @@ binary-indep: build
 	dh_link
 	dh_compress
 	dh_fixperms
-	chmod 644 $(CURDIR)/debian/pulse-update-manager/usr/share/pulse-update-manager/*
-	chmod 755 $(CURDIR)/debian/pulse-update-manager/usr/share/pulse-update-manager/pulse-update-manager.py
+	chmod 644 $(CURDIR)/debian/medulla-update-manager/usr/share/medulla-update-manager/*
+	chmod 755 $(CURDIR)/debian/medulla-update-manager/usr/share/medulla-update-manager/medulla-update-manager.py
 	dh_installdeb
 	dh_gencontrol
 	dh_md5sums
